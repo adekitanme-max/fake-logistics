@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>FastTrack Express - Track Your Shipment</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Inter', sans-serif;
+      background: #f5f9fc;
+      color: #333;
+    }
+    header {
+      background-color: #003366;
+      color: white;
+      padding: 30px 20px;
+      text-align: center;
+    }
+    header h1 {
+      margin: 0;
+      font-size: 2.8em;
+    }
+    .hero {
+      text-align: center;
+      padding: 60px 20px;
+    }
+    .hero h2 {
+      font-size: 2em;
+      margin-bottom: 10px;
+    }
+    .hero p {
+      font-size: 1.1em;
+      color: #666;
+    }
+    .track-form {
+      margin-top: 30px;
+    }
+    input[type="text"] {
+      padding: 14px;
+      width: 300px;
+      max-width: 90%;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      font-size: 16px;
+    }
+    button {
+      padding: 14px 20px;
+      background-color: #003366;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      font-size: 16px;
+      cursor: pointer;
+      margin-left: 10px;
+    }
+    button:hover {
+      background-color: #0059b3;
+    }
+    #result {
+      margin-top: 40px;
+      text-align: left;
+      width: 90%;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.08);
+    }
+    ul {
+      list-style-type: none;
+      padding-left: 0;
+    }
+    ul li {
+      padding: 8px 0;
+      border-bottom: 1px solid #eee;
+    }
+    footer {
+      text-align: center;
+      padding: 20px;
+      background: #f1f1f1;
+      font-size: 0.9em;
+      color: #777;
+      margin-top: 40px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>FastTrack Express</h1>
+    <p>Reliable Shipping & Real-Time Tracking Worldwide</p>
+  </header>
+
+  <section class="hero">
+    <h2>Track Your Shipment</h2>
+    <p>Enter your tracking number below to view delivery updates.</p>
+    <div class="track-form">
+      <form onsubmit="event.preventDefault(); track();">
+        <input id="trackId" type="text" placeholder="e.g., FTX392847102" />
+        <button type="submit">Track</button>
+      </form>
+    </div>
+  </section>
+
+  <div id="result"></div>
+
+  <footer>
+    &copy; 2025 FastTrack Express. All rights reserved.
+  </footer>
+
+  <script>
+    function track() {
+      const id = document.getElementById('trackId').value.trim();
+      if (!id) {
+        alert("Please enter a tracking number.");
+        return;
+      }
+      fetch('/track/' + id)
+        .then(res => res.json())
+        .then(data => {
+          const resultDiv = document.getElementById('result');
+          if (data.error) {
+            resultDiv.innerHTML = '<p style="color:red;">' + data.error + '</p>';
+          } else {
+            let html = '<h3>Shipment for <strong>' + data.name + '</strong></h3>';
+            html += '<p><strong>From:</strong> ' + data.origin + '<br><strong>To:</strong> ' + data.destination + '</p>';
+            html += '<ul>';
+            
+let html = '<h3>Shipment for <strong>' + data.name + '</strong></h3>';
+html += '<p><strong>From:</strong> ' + data.origin + '<br><strong>To:</strong> ' + data.destination + '</p>';
+let deliveryDate = new Date();
+deliveryDate.setDate(deliveryDate.getDate() + 4);
+html += '<p><strong>Delivery Estimate:</strong> ' + deliveryDate.toDateString() + '</p>';
+html += '<ul>';
+
+              html += '<li><strong>' + s.stage + '</strong> — ' + s.time + '</li>';
+            });
+            html += '</ul>';
+            resultDiv.innerHTML = html;
+          }
+        })
+        .catch(err => {
+          document.getElementById('result').innerHTML = '<p style="color:red;">Error fetching tracking info.</p>';
+        });
+    }
+  </script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<script>
+function downloadQR() {
+  const qrCanvas = document.querySelector('#qr canvas');
+  const img = document.createElement('img');
+  img.src = qrCanvas.toDataURL("image/png");
+  const link = document.createElement('a');
+  link.href = img.src;
+  link.download = 'tracking_qr.png';
+  link.click();
+}
+</script>
+
+</body>
+</html>

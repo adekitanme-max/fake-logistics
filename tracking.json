@@ -1,0 +1,56 @@
+{
+  "FTX392847102": {
+    "name": "James Okoro",
+    "origin": "Lagos, Nigeria",
+    "destination": "Accra, Ghana",
+    "status": [
+      {
+        "stage": "Label Created",
+        "time": "2025-07-20 09:15"
+      },
+      {
+        "stage": "Picked Up",
+        "time": "2025-07-20 13:40"
+      },
+      {
+        "stage": "In Transit",
+        "time": "2025-07-21 08:00"
+      },
+      {
+        "stage": "Out for Delivery",
+        "time": "2025-07-23 10:30"
+      },
+      {
+        "stage": "Delivered",
+        "time": "2025-07-24 12:00"
+      }
+    ]
+  },
+  "FTX209384756": {
+    "name": "Angela Mensah",
+    "origin": "Abuja, Nigeria",
+    "destination": "Kumasi, Ghana",
+    "status": [
+      {
+        "stage": "Label Created",
+        "time": "2025-07-21 10:10"
+      },
+      {
+        "stage": "Picked Up",
+        "time": "2025-07-21 14:00"
+      },
+      {
+        "stage": "In Transit",
+        "time": "2025-07-22 11:30"
+      },
+      {
+        "stage": "Out for Delivery",
+        "time": "2025-07-23 09:45"
+      },
+      {
+        "stage": "Delivered",
+        "time": "2025-07-24 11:20"
+      }
+    ]
+  }
+}
